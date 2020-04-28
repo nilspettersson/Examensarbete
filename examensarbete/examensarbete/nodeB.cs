@@ -11,8 +11,9 @@ namespace examensarbete
 
         private NodeB[] children;
 
-        public NodeB()
+        public NodeB(string id)
         {
+            setId(id);
             children = new NodeB[] { };
         }
 
