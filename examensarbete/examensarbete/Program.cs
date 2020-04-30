@@ -57,8 +57,9 @@ namespace examensarbete
                 }
                 if (!isChild)
                 {
-                    addRecursiveChildren(treeA, treeA[currentIndex]);
-                    treeB.Add(new NodeB(treeA[currentIndex].getId()));
+                    NodeB child = new NodeB(treeA[currentIndex].getId());
+                    child.setChildren(addRecursiveChildren(treeA, treeA[currentIndex]));
+                    treeB.Add(child);
                 }
             }
 
@@ -71,7 +72,7 @@ namespace examensarbete
             return recursiveTree;
         }
 
-        public static void addRecursiveChildren(NodeA[] treeA, NodeA parent)
+        public static NodeB[] addRecursiveChildren(NodeA[] treeA, NodeA parent)
         {
             NodeB[] treeB = new NodeB[parent.getChildren().Length];
             int index = 0;
@@ -79,16 +80,17 @@ namespace examensarbete
             {
                 for (int j = 0; j < parent.getChildren().Length; j++)
                 {
-                        
                     if (treeA[i].getId() == parent.getChildren()[j])
                     {
-                        addRecursiveChildren(treeA, treeA[i]);
-                        treeB[index] = new NodeB(treeA[i].getId());
+                        NodeB child = new NodeB(treeA[i].getId());
+                        child.setChildren(addRecursiveChildren(treeA, treeA[i]));
+                        treeB[index] = child;
                         index++;
                     }
 
                 }
             }
+            return treeB;
         }
 
 
